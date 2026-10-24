@@ -29,8 +29,19 @@ Scenario: restrict to movies with "PG" or "R" ratings
   # enter step to "submit" the search form on the homepage
   # enter step(s) to ensure that PG and R movies are visible
   # enter step(s) to ensure that other movies are not visible
-  Then complete the rest of of this scenario
+  And I uncheck "G" checkbox
+  And I uncheck "PG-13" checkbox
+  And I press "Refresh"
+  Then I should see the following movies: The Terminator, When Harry Met Sally, Amelie, The Incredibles, Raiders of the Lost Ark
+  And I should not see the following movies: Aladdin, The Help, Chocolat, 2001: A Space Odyssey, Chicken Run
 
 Scenario: all ratings selected
-  # your steps here
-  Then complete the rest of of this scenario
+# your steps here
+When I go to the RottenPotatoes home page
+And I uncheck "G" checkbox 
+And I uncheck "PG" checkbox
+And I uncheck "PG-13" checkbox
+And I uncheck "R" checkbox
+  And I check the following ratings: G, PG, PG-13, R
+  And I press "Refresh"
+  Then I should see all the movies
